@@ -1,0 +1,12 @@
+/home/pykj/java/mavenPro/parent/code-parent/core-frame/src/com/rensframework/core/entity/TimeEntity.java
+/home/pykj/java/mavenPro/parent/code-parent/core-frame/src/com/rensframework/core/entity/Component.java
+/home/pykj/java/mavenPro/parent/code-parent/core-frame/src/com/rensframework/core/spring/ContainerComponentConverter.java
+/home/pykj/java/mavenPro/parent/code-parent/core-frame/src/com/rensframework/core/entity/Auditable.java
+/home/pykj/java/mavenPro/parent/code-parent/core-frame/src/com/rensframework/core/spring/ListFactoryBean.java
+/home/pykj/java/mavenPro/parent/code-parent/core-frame/src/com/rensframework/core/spring/PageableArgumentResolver.java
+/home/pykj/java/mavenPro/parent/code-parent/core-frame/src/com/rensframework/core/entity/listener/TimeEntityListener.java
+/home/pykj/java/mavenPro/parent/code-parent/core-frame/src/com/rensframework/core/service/BaseService.java
+/home/pykj/java/mavenPro/parent/code-parent/core-frame/src/com/rensframework/core/entity/BaseEntity.java
+/home/pykj/java/mavenPro/parent/code-parent/core-frame/src/com/rensframework/core/spring/SysPropertiesConfig.java
+/home/pykj/java/mavenPro/parent/code-parent/core-frame/src/com/rensframework/core/entity/ContainerComponent.java
+/home/pykj/java/mavenPro/parent/code-parent/core-frame/src/com/rensframework/core/entity/Entity.java
