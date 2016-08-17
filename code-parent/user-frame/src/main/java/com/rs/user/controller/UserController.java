@@ -127,9 +127,7 @@ public class UserController {
 		}
 		model.addAttribute("roleOption", roleOption);
 		model.addAttribute("entity", user);
-		model.addAttribute("factor", this.userService
-
-		.passwordPublicFactor(subject.getSession().getId()));
+		model.addAttribute("factor", this.userService.passwordPublicFactor(subject.getSession().getId()));
 		return "user/form";
 	}
 

@@ -1,8 +1,10 @@
 package com.rs.user.controller;
 
+import javax.crypto.EncryptedPrivateKeyInfo;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.ExpiredCredentialsException;
@@ -18,12 +20,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.rs.util.EncryptUtils;
+
 @Controller
 public class LoginController {
 
 	@RequestMapping(value = {"/login", "/login;JSESSIONID={sessionId}", "/signon", "/signon;JSESSIONID={sessionId}"})
 	public String redirectLogin() {
-		return "user/login";
+		Subject subject = SecurityUtils.getSubject();  
+        if (subject.isAuthenticated()) {  
+            return "redirect:/manage";
+        } else {  
+            return "user/login";
+        }  
 	}
 
 	@RequestMapping(value = { "/dologin", "/dologin;JSESSIONID={sessionId}",
@@ -34,7 +43,7 @@ public class LoginController {
 		String msg = "";  
 	    System.out.println(userName);  
 	    System.out.println(password);
-	    UsernamePasswordToken token = new UsernamePasswordToken(userName, password);  
+	    UsernamePasswordToken token = new UsernamePasswordToken(userName, EncryptUtils.encryptMD5(password)); 
 	    token.setRememberMe(true);  
 	    Subject subject = SecurityUtils.getSubject();  
 	    try {  
@@ -74,6 +83,18 @@ public class LoginController {
 	        System.out.println(msg);  
 	    }  
 	    return "user/login";  
+	}
+	
+	@RequestMapping(value = "logout",method = { RequestMethod.GET })
+	public String logout() {
+		Subject currentUser = SecurityUtils.getSubject();
+		try {
+			currentUser.logout();
+		} catch (AuthenticationException e) {
+			e.printStackTrace();
+
+		}
+		return "/login";
 	}
 
 }

@@ -24,8 +24,9 @@
 
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
 
-	<!-- 数据库保存的密码是使用MD5算法加密的，所以这里需要配置一个密码匹配对象 -->
-	<bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.Md5CredentialsMatcher"></bean>
+	<!-- 数据库保存的密码是使用MD5算法加密的，所以这里需要配置一个密码匹配对象
+	<bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.Md5CredentialsMatcher"></bean> -->
+	
 	<bean id="consoleCla" class="com.rs.user.frame.ConsoleCla">
 		<property name="consoleString" value="renshuo-shiro"></property>
 	</bean>
@@ -34,11 +35,11 @@
 
 	<!-- 使用Shiro自带的JdbcRealm类 指定密码匹配所需要用到的加密对象 指定存储用户、角色、权限许可的数据源及相关查询语句 -->
 	<bean id="jdbcRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm">
-		<property name="credentialsMatcher" ref="credentialsMatcher"></property>
+		<!-- <property name="credentialsMatcher" ref="credentialsMatcher"></property>-->
 		<property name="permissionsLookupEnabled" value="true"></property>
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="authenticationQuery"
-			value="SELECT password FROM usr_user WHERE user_name = ?"></property>
+			value="SELECT password FROM usr_user WHERE account = ?"></property>
 		<property name="userRolesQuery"
 			value="SELECT role_name from usr_user_role left join usr_role using(role_id) left join usr_user using(user_id) WHERE user_name = ?"></property>
 		<property name="permissionsQuery"
@@ -63,6 +64,7 @@
 		<property name="unauthorizedUrl" value="/"></property>
 		<property name="filterChainDefinitions">
 			<value>
+				/s/**=anon
 				/login=anon
 				/signon=anon
 				/dologin=anon

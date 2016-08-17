@@ -10,14 +10,12 @@ import com.rs.user.entity.User;
 public interface UserDao extends PagingAndSortingRepository<User, Long>,
 		JpaSpecificationExecutor<User> {
 
-	public abstract User findByAccount(String paramString);
+	public User findByAccount(String paramString);
 
-	public abstract List<User> findByNameContainingAndRemoved( String paramString, boolean paramBoolean);
+	public User findByEmail(String paramString);
 
-	public abstract User findByEmail(String paramString);
+	public User findByCellphone(String paramString);
 
-	public abstract User findByCellphone(String paramString);
-
-	public abstract List<User> findByNameContaining(String paramString);
+	public List<User> findByNameContaining(String paramString);
 
 }
