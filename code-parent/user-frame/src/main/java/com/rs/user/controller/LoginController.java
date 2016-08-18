@@ -1,6 +1,5 @@
 package com.rs.user.controller;
 
-import javax.crypto.EncryptedPrivateKeyInfo;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
@@ -14,17 +13,24 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.rs.user.entity.User;
+import com.rs.user.model.LoginInfo;
+import com.rs.user.service.UserService;
 import com.rs.util.EncryptUtils;
 
 @Controller
 public class LoginController {
 
+	@Autowired
+	private UserService userService;
+	
 	@RequestMapping(value = {"/login", "/login;JSESSIONID={sessionId}", "/signon", "/signon;JSESSIONID={sessionId}"})
 	public String redirectLogin() {
 		Subject subject = SecurityUtils.getSubject();  
@@ -43,11 +49,16 @@ public class LoginController {
 		String msg = "";  
 	    System.out.println(userName);  
 	    System.out.println(password);
-	    UsernamePasswordToken token = new UsernamePasswordToken(userName, EncryptUtils.encryptMD5(password)); 
-	    token.setRememberMe(true);  
-	    Subject subject = SecurityUtils.getSubject();  
+	    
+	    
+	    User user = userService.findByAccount(userName);
+	    UsernamePasswordToken token = new UsernamePasswordToken(userName, EncryptUtils.encryptSHA1(user.getSalt(), password));
+	    token.setRememberMe(true);
+	    Subject subject = SecurityUtils.getSubject(); 
 	    try {  
-	        subject.login(token);  
+	        subject.login(token);
+	        
+//	        new SimpleAuthenticationInfo(new LoginInfo(user.getId(), (String)SecurityUtils.getSubject().getSession().getId(), user.getAccount(), user.getPoolId().longValue()), user.getPassword(), ByteSource.Util.bytes(salt), getName());
 	        if (subject.isAuthenticated()) {  
 	            return "redirect:/manage";
 	        } else {  
@@ -85,7 +96,7 @@ public class LoginController {
 	    return "user/login";  
 	}
 	
-	@RequestMapping(value = "logout",method = { RequestMethod.GET })
+	@RequestMapping(value = "/logout",method = { RequestMethod.GET })
 	public String logout() {
 		Subject currentUser = SecurityUtils.getSubject();
 		try {
@@ -94,7 +105,7 @@ public class LoginController {
 			e.printStackTrace();
 
 		}
-		return "/login";
+		return "user/login";
 	}
 
 }

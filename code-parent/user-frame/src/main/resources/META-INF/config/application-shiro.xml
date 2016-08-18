@@ -45,10 +45,13 @@
 		<property name="permissionsQuery"
 			value="SELECT permission_name FROM usr_role_permission left join usr_role using(role_id) left join usr_permission using(permission_id) WHERE role_name = ?"></property>
 	</bean>
+	
+	<bean id="shiroDbRealm" class="com.rs.shiro.ShiroDbRealm"></bean>
+	
 
 	<!-- Shiro安全管理器 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="realm" ref="jdbcRealm"></property>
+		<property name="realm" ref="shiroDbRealm"></property>
 		<property name="cacheManager" ref="cacheManager"></property>
 	</bean>
 

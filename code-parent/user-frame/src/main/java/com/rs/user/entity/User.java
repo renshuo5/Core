@@ -80,6 +80,8 @@ public class User extends TimeEntity implements Auditable<User> {
 	private boolean audited;
 	
 	private int level;
+	
+	private boolean removed;
 
 	@ManyToMany(cascade = { javax.persistence.CascadeType.PERSIST,
 			javax.persistence.CascadeType.MERGE })

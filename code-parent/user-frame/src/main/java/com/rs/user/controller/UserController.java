@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rs.user.entity.LoginInfo;
+import com.rs.user.model.LoginInfo;
 import com.rs.user.entity.Role;
 import com.rs.user.entity.User;
 import com.rs.user.service.RoleService;

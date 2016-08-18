@@ -31,9 +31,17 @@ package com.rs.user.service;
 //import org.apache.commons.io.IOUtils;
 //import org.apache.commons.lang.StringUtils;
 //import org.apache.commons.lang.exception.ExceptionUtils;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.beans.factory.annotation.Value;
-//import org.springframework.cache.Cache;
+import org.springframework.cache.Cache;
 //import org.springframework.cache.ehcache.EhCacheCacheManager;
 //import org.springframework.core.io.ClassPathResource;
 //import org.springframework.data.domain.Page;
@@ -43,7 +51,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 //import org.springframework.mail.javamail.JavaMailSenderImpl;
 //import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
 
 //import org.springframework.transaction.annotation.Transactional;
 //
@@ -76,7 +83,7 @@ public class UserService extends BaseService<User> {
 //
 //	@Autowired
 //	private EhCacheCacheManager ehCacheManager;
-//	private Cache captchaValidateIp;
+	private Cache captchaValidateIp;
 //	private Cache captchaValidateAccount;
 //	private Cache captchaLoginVerification;
 //	private Cache shiroAuthorizationCache;
@@ -114,28 +121,28 @@ public class UserService extends BaseService<User> {
 //				.getCache("shiroAuthorizationCache");
 //	}
 //
-//	public boolean checkPassword(User user, String password) {
-//		try {
-//			MessageDigest digest = MessageDigest.getInstance("SHA-1");
-//			byte[] salt = Hex.decodeHex(user.getSalt().toCharArray());
-//			digest.update(salt);
-//			byte[] hashPassword = digest.digest(password.getBytes());
-//			String p = Hex.encodeHexString(hashPassword);
-//			return user.getPassword().equals(p);
-//		} catch (NoSuchAlgorithmException e) {
-//			this.logger.error(ExceptionUtils.getStackTrace(e));
-//			throw new RuntimeException(e);
-//		} catch (DecoderException e) {
-//			this.logger.error(ExceptionUtils.getStackTrace(e));
-//			throw new RuntimeException(e);
-//		}
-//	}
-//
-//	public boolean checkPassword(Long id, String password) {
-//		User user = (User) this.userDao.findOne(id);
-//		return checkPassword(user, password);
-//	}
-//
+	public boolean checkPassword(User user, String password) {
+		try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-1");
+			byte[] salt = Hex.decodeHex(user.getSalt().toCharArray());
+			digest.update(salt);
+			byte[] hashPassword = digest.digest(password.getBytes());
+			String p = Hex.encodeHexString(hashPassword);
+			return user.getPassword().equals(p);
+		} catch (NoSuchAlgorithmException e) {
+			this.logger.error(ExceptionUtils.getStackTrace(e));
+			throw new RuntimeException(e);
+		} catch (DecoderException e) {
+			this.logger.error(ExceptionUtils.getStackTrace(e));
+			throw new RuntimeException(e);
+		}
+	}
+
+	public boolean checkPassword(Long id, String password) {
+		User user = (User) this.userDao.findOne(id);
+		return checkPassword(user, password);
+	}
+
 //	@Transactional(readOnly = false)
 //	public User updatePassword(Long id, String newPassword) {
 //		User user = (User) this.userDao.findOne(id);
@@ -171,56 +178,56 @@ public class UserService extends BaseService<User> {
 //			throw new RuntimeException(e);
 //		}
 //	}
-//
-//	public User findByAccount(String account) {
-//		return this.userDao.findByAccount(account);
-//	}
-//
-//	public User findByEmail(String email) {
-//		return this.userDao.findByEmail(email);
-//	}
-//
-//	public User findByCellphone(String cellphone) {
-//		return this.userDao.findByCellphone(cellphone);
-//	}
-//
-//	public Long count() {
-//		return Long.valueOf(this.userDao.count());
-//	}
-//
-//	public Iterable<User> getAll() {
-//		return this.userDao.findAll();
-//	}
-//
-//	public Set<String> getAllPermission(Long userId) {
-//		User u = (User) this.userDao.findOne(userId);
-//		Set<String> set = new HashSet();
-//		for (Role r : u.getRoles()) {
-//			for (Permission p : r.getPermissions()) {
-//				set.add(p.getPerm());
-//			}
-//		}
-//		return set;
-//	}
-//
-//	public Set<String> getAllPermission(String account) {
-//		User u = this.userDao.findByAccount(account);
-//		Set<String> set = new HashSet();
-//		for (Role r : u.getRoles()) {
-//			for (Permission p : r.getPermissions()) {
-//				set.add(p.getPerm());
-//			}
-//		}
-//		return set;
-//	}
-//
-//	// @Transactional(readOnly=false)
-//	// public void recordLoginLog(ClientInfo clientInfo, String account, Boolean
-//	// pass)
-//	// {
-//	// recordLoginLog(clientInfo, account, pass, null);
-//	// }
-//
+
+	public User findByAccount(String account) {
+		return this.userDao.findByAccount(account);
+	}
+
+	public User findByEmail(String email) {
+		return this.userDao.findByEmail(email);
+	}
+
+	public User findByCellphone(String cellphone) {
+		return this.userDao.findByCellphone(cellphone);
+	}
+
+	public Long count() {
+		return Long.valueOf(this.userDao.count());
+	}
+
+	public Iterable<User> getAll() {
+		return this.userDao.findAll();
+	}
+
+	public Set<String> getAllPermission(Long userId) {
+		User u = (User) this.userDao.findOne(userId);
+		Set<String> set = new HashSet<String>();
+		for (Role r : u.getRoles()) {
+			for (Permission p : r.getPermissions()) {
+				set.add(p.getPerm());
+			}
+		}
+		return set;
+	}
+
+	public Set<String> getAllPermission(String account) {
+		User u = this.userDao.findByAccount(account);
+		Set<String> set = new HashSet<String>();
+		for (Role r : u.getRoles()) {
+			for (Permission p : r.getPermissions()) {
+				set.add(p.getPerm());
+			}
+		}
+		return set;
+	}
+
+//	 @Transactional(readOnly=false)
+//	 public void recordLoginLog(ClientInfo clientInfo, String account, Boolean
+//	 pass)
+//	 {
+//	 recordLoginLog(clientInfo, account, pass, null);
+//	 }
+
 //	// @Transactional(readOnly=false)
 //	// public void recordLoginLog(ClientInfo clientInfo, String account, Boolean
 //	// pass, String extraText)
@@ -292,12 +299,12 @@ public class UserService extends BaseService<User> {
 //		this.captchaLoginVerification.evict(sessionId);
 //		return flag;
 //	}
-//
-//	public long captchaValidateByIp(String ip) {
-//		Cache.ValueWrapper e = this.captchaValidateIp.get(ip);
-//		return e == null ? 0L : ((Long) e.get()).longValue();
-//	}
-//
+
+	public long captchaValidateByIp(String ip) {
+		Cache.ValueWrapper e = this.captchaValidateIp.get(ip);
+		return e == null ? 0L : ((Long) e.get()).longValue();
+	}
+
 //	public long captchaValidateByAccount(String account) {
 //		if (StringUtils.isBlank(account)) {
 //			return 0L;
