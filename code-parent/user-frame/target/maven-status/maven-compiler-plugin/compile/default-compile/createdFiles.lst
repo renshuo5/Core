@@ -1,1 +1,11 @@
+com/rs/user/model/LoginInfo.class
+com/rs/user/service/RoleService.class
+com/rs/shiro/ShiroDbRealm.class
+com/rs/user/service/UserService.class
+com/rs/util/RsaUtils.class
+com/rs/util/EncryptUtils.class
+com/rs/user/controller/LoginController.class
+com/rs/user/dao/PermissionDao.class
+com/rs/user/dao/UserDao.class
+com/rs/user/dao/RoleDao.class
 com/rs/user/frame/ConsoleCla.class

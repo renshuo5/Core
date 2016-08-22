@@ -1,1 +1,12 @@
 /home/pykj/java/mavenPro/parent/code-parent/user-frame/src/main/java/com/rs/user/frame/ConsoleCla.java
+/home/pykj/java/mavenPro/parent/code-parent/user-frame/src/main/java/com/rs/user/dao/PermissionDao.java
+/home/pykj/java/mavenPro/parent/code-parent/user-frame/src/main/java/com/rs/user/controller/UserController.java
+/home/pykj/java/mavenPro/parent/code-parent/user-frame/src/main/java/com/rs/util/RsaUtils.java
+/home/pykj/java/mavenPro/parent/code-parent/user-frame/src/main/java/com/rs/util/EncryptUtils.java
+/home/pykj/java/mavenPro/parent/code-parent/user-frame/src/main/java/com/rs/user/service/RoleService.java
+/home/pykj/java/mavenPro/parent/code-parent/user-frame/src/main/java/com/rs/user/service/UserService.java
+/home/pykj/java/mavenPro/parent/code-parent/user-frame/src/main/java/com/rs/user/dao/RoleDao.java
+/home/pykj/java/mavenPro/parent/code-parent/user-frame/src/main/java/com/rs/shiro/ShiroDbRealm.java
+/home/pykj/java/mavenPro/parent/code-parent/user-frame/src/main/java/com/rs/user/model/LoginInfo.java
+/home/pykj/java/mavenPro/parent/code-parent/user-frame/src/main/java/com/rs/user/dao/UserDao.java
+/home/pykj/java/mavenPro/parent/code-parent/user-frame/src/main/java/com/rs/user/controller/LoginController.java

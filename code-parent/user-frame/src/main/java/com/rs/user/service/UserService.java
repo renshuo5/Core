@@ -52,14 +52,14 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 //import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.model.entity.Permission;
+import com.model.entity.Role;
+import com.model.entity.User;
 //import org.springframework.transaction.annotation.Transactional;
 //
 import com.rensframework.core.service.BaseService;
 import com.rs.user.dao.RoleDao;
 import com.rs.user.dao.UserDao;
-import com.rs.user.entity.Permission;
-import com.rs.user.entity.Role;
-import com.rs.user.entity.User;
 //import com.rs.util.RsaUtils;
 //
 //import freemarker.template.Configuration;

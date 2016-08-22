@@ -20,8 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.rs.user.entity.User;
-import com.rs.user.model.LoginInfo;
+import com.model.entity.User;
 import com.rs.user.service.UserService;
 import com.rs.util.EncryptUtils;
 

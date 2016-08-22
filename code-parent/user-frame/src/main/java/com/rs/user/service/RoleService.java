@@ -15,11 +15,11 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.model.entity.Permission;
+import com.model.entity.Role;
 import com.rensframework.core.service.BaseService;
 import com.rs.user.dao.PermissionDao;
 import com.rs.user.dao.RoleDao;
-import com.rs.user.entity.Permission;
-import com.rs.user.entity.Role;
 
 @Service
 public class RoleService extends BaseService<Role> {

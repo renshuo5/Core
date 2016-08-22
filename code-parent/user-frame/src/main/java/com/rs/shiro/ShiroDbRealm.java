@@ -24,7 +24,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.rs.user.entity.User;
+import com.model.entity.User;
 import com.rs.user.model.LoginInfo;
 import com.rs.user.service.UserService;
 

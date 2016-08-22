@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.rs.user.entity.User;
+import com.model.entity.User;
 
 public interface UserDao extends PagingAndSortingRepository<User, Long>,
 		JpaSpecificationExecutor<User> {

@@ -1,4 +1,5 @@
 com.rensframework.core.entity
 com.rensframework.core.entity.listener
+com.rensframework.core.model
 com.rensframework.core.service
 com.rensframework.core.spring
